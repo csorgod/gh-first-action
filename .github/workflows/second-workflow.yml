@@ -15,6 +15,7 @@ jobs:
       - name: Run tests
         run: pytest
   deploy:
+    needs: test # Depends on test to be executed (safe deploy)
     runs-on: ubuntu-latest
     steps:
       - name: Get code
