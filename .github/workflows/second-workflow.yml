@@ -1,4 +1,4 @@
-name: Test Project
+name: Deploy project
 on: push
 jobs: 
   test: 
@@ -14,3 +14,18 @@ jobs:
         run: pip install -r requirements.txt  
       - name: Run tests
         run: pytest
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3 #External action from the marketplace
+      - name: Install nodeJS
+        uses: actions/setup-python@v4
+        with: # Optional configuration. See docs at https://github.com/actions/setup-python.
+          python-version: '3.10' 
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Build project
+        run: pip build whatever
+      - name: Deploy 
+        run: echo "Deploying..."
